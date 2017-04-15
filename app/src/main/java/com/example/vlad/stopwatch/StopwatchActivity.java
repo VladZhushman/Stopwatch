@@ -26,6 +26,7 @@ public class StopwatchActivity extends AppCompatActivity {
 
     public void onClickReset(View view) {
         seconds = 0;
+        running = true;
     }
 
 
@@ -85,5 +86,20 @@ public class StopwatchActivity extends AppCompatActivity {
         super.onStart();
         if (was_running)
         running = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        was_running = running;
+        running = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (was_running) {
+            running = true;
+        }
     }
 }
